@@ -11,6 +11,7 @@ import { GroupsView } from "@/components/views/groups-view";
 import { BracketView } from "@/components/views/bracket-view";
 import { TeamsView } from "@/components/views/teams-view";
 import { Button } from "@/components/ui/button";
+import Loading from "@/components/loading";
 
 const NAV = [
   { id: "overview", label: "Overview", icon: LayoutGrid },
@@ -27,7 +28,7 @@ export function WorldCupApp() {
   const { fixtures, loading } = useApp();
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   return (

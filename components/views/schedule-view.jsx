@@ -4,6 +4,7 @@ import { useMemo, useState } from "react";
 import { useApp } from "@/context/AppContext";
 import { MatchCard } from "@/components/match-card";
 import { cn } from "@/lib/utils";
+import Loading from "@/components/loading";
 
 const FILTERS = [
   { id: "all", label: "All" },
@@ -40,7 +41,7 @@ export function ScheduleView() {
   const liveCount = fixtures.filter((m) => m.fixture.status.long === "live").length;
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <Loading/>;
   }
 
   return (
