@@ -1,4 +1,3 @@
-import { teamMap } from "@/lib/data";
 import { cn } from "@/lib/utils";
 import { MapPin } from "lucide-react";
 

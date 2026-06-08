@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useState } from "react";
 import { Search } from "lucide-react";
+import Loading from "@/components/loading";
 
 import { useApp } from "@/context/AppContext";
 import { cn } from "@/lib/utils";
@@ -21,7 +22,6 @@ export function TeamsView() {
   const [selected, setSelected] = useState(null);
   const [players, setPlayers] = useState([]);
   const [loadingPlayers, setLoadingPlayers] = useState(false);
-
 
   const filtered = useMemo(() => {
     return (teams || []).filter((item) =>
@@ -69,9 +69,7 @@ export function TeamsView() {
       </div>
 
       {loading ? (
-        <div className="rounded-xl border border-border p-8 text-center text-muted-foreground">
-          Loading teams...
-        </div>
+        <Loading />
       ) : (
         <>
           <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
@@ -128,17 +126,9 @@ export function TeamsView() {
   );
 }
 
-function TeamDialog({
-  team,
-  players,
-  loadingPlayers,
-  onClose,
-}) {
+function TeamDialog({ team, players, loadingPlayers, onClose }) {
   return (
-    <Dialog
-      open={!!team}
-      onOpenChange={(open) => !open && onClose()}
-    >
+    <Dialog open={!!team} onOpenChange={(open) => !open && onClose()}>
       <DialogContent className="max-h-[85vh] overflow-y-auto sm:max-w-2xl">
         {team && (
           <>
@@ -155,39 +145,22 @@ function TeamDialog({
             </DialogHeader>
 
             <div className="grid grid-cols-2 gap-3">
-              <Stat
-                label="Country"
-                value={team.team.country}
-              />
+              <Stat label="Country" value={team.team.country} />
 
-              <Stat
-                label="Code"
-                value={team.team.code}
-              />
+              <Stat label="Code" value={team.team.code} />
 
-              <Stat
-                label="Stadium"
-                value={team.venue.name}
-              />
+              <Stat label="Stadium" value={team.venue.name} />
 
-              <Stat
-                label="City"
-                value={team.venue.city}
-              />
+              <Stat label="City" value={team.venue.city} />
             </div>
 
             <div>
-              <h3 className="mb-3 font-semibold">
-                Squad
-              </h3>
+              <h3 className="mb-3 font-semibold">Squad</h3>
 
               {loadingPlayers ? (
-                <div className="rounded-xl border border-border p-6 text-center text-muted-foreground">
-                  Loading players...
-                </div>
+                <Loading />
               ) : (
                 <>
-
                   {Array.isArray(players) && players.length > 0 ? (
                     <div className="space-y-2">
                       {players.map((player, index) => (
@@ -195,10 +168,10 @@ function TeamDialog({
                           key={player?.id || index}
                           className="flex items-center gap-3 rounded-lg border p-3"
                         >
-                          <img src={player?.photo} alt={player?.name} className="me-4 h-10 w-10 object-contain rounded-full" />
                           <div className="font-medium">
-                            {player?.name ||
-                              "Unknown player"} - {player?.number || "Unknown number"} - {player?.position || "Unknown position"}
+                            {player?.number || "Unknown number"} -{" "}
+                            {player?.name || "Unknown player"}-{" "}
+                            {player?.position || "Unknown position"}
                           </div>
                         </div>
                       ))}
@@ -221,9 +194,7 @@ function TeamDialog({
 function Stat({ label, value }) {
   return (
     <div className="rounded-lg border border-border bg-secondary/40 p-3 text-center">
-      <div className="text-sm font-semibold break-words">
-        {value}
-      </div>
+      <div className="text-sm font-semibold break-words">{value}</div>
 
       <div className="mt-1 text-[10px] uppercase tracking-wider text-muted-foreground">
         {label}

@@ -1,21 +1,20 @@
 "use client";
 
-import { matches, topScorers, teamMap, tournament, teams } from "@/lib/data";
 import { MatchCard } from "@/components/match-card";
 import { ArrowRight, Flag, MapPin, Star, Users } from "lucide-react";
 import { useApp } from "@/context/AppContext";
 
 export function OverviewView({ onNavigate }) {
-  const { fixtures, standings, teams, loading } = useApp();
+  const { fixtures, standings, teams, stadiums, loading } = useApp();
   const liveMatches = fixtures.filter((m) => m.fixture.status.long === "live");
   const upcoming = fixtures.filter((m) => m.fixture.status.long === "Not Started").slice(0, 3);
-  const scorers = topScorers.slice(0, 5);
+
 
 
   const stats = [
     { label: "Teams", value: teams.length , icon: Users },
     { label: "Matches", value: fixtures.length , icon: Flag },
-    { label: "Host cities", value: tournament.venuesCount, icon: MapPin },
+    { label: "Host cities", value: stadiums.length, icon: MapPin },
     { label: "Confederations", value: 6, icon: Star },
   ];
 
@@ -108,7 +107,7 @@ export function OverviewView({ onNavigate }) {
               Players
             </button>
           </div>
-          <ol className="space-y-1">
+          {/* <ol className="space-y-1">
             {scorers.map((p, i) => {
               const team = teamMap[p.teamId];
               return (
@@ -139,7 +138,7 @@ export function OverviewView({ onNavigate }) {
                 </li>
               );
             })}
-          </ol>
+          </ol> */}
         </div>
 
         <div className="rounded-xl border border-border bg-card p-5">

@@ -68,7 +68,7 @@ export async function getPlayersForTeam(teamId) {
 }
 
 export async function getTopScorers() {
-  const res = await fetch(`${API_URL}/top-scorers`,
+  const res = await fetch(`${API_URL}/players/topscorers`,
     {
         headers: {
             "X-API-Key": API_KEY

@@ -6,7 +6,7 @@ import { AppProvider } from "@/context/AppContext";
 const fontSans = Inter({ subsets: ["latin"], variable: "--font-sans" });
 
 export const metadata = {
-  title: "World Cup 2026 — Tournament Hub",
+  title: "World Cup 2026",
   description:
     "Fixtures, group standings, the knockout bracket, teams and players for the 2026 FIFA World Cup hosted by USA, Canada and Mexico.",
 };

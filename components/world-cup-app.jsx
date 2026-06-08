@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { CalendarDays, LayoutGrid, Trophy, Users, Menu, X } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { tournament } from "@/lib/data";
 import { useApp } from "@/context/AppContext";
 import { OverviewView } from "@/components/views/overview-view";
 import { ScheduleView } from "@/components/views/schedule-view";
@@ -25,7 +24,8 @@ const NAV = [
 export function WorldCupApp() {
   const [view, setView] = useState("overview");
   const [mobileOpen, setMobileOpen] = useState(false);
-  const { fixtures, loading } = useApp();
+  const {  loading, league } = useApp();
+
 
   if (loading) {
     return <Loading/>;
@@ -46,10 +46,10 @@ export function WorldCupApp() {
             </span>
             <span className="leading-tight">
               <span className="block font-mono text-xs uppercase tracking-widest text-primary">
-                World Cup
+                {league.name}
               </span>
               <span className="block text-base font-bold tracking-tight">
-                2026
+                {league.season}
               </span>
             </span>
           </button>
@@ -78,7 +78,7 @@ export function WorldCupApp() {
 
           <div className="hidden items-center gap-2 lg:flex">
             <span className="rounded-full border border-border px-3 py-1 font-mono text-xs text-muted-foreground">
-              {tournament.hosts}
+              {league.name} · {league.season}
             </span>
           </div>
 
@@ -136,10 +136,9 @@ export function WorldCupApp() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-7xl flex-col items-start justify-between gap-2 px-4 py-6 text-xs text-muted-foreground sm:flex-row sm:items-center sm:px-6">
           <p>
-            {tournament.name} · {tournament.hosts}
+            {league.name} · {league.season}            
           </p>
-          <p className="font-mono">Sample data for demonstration only.</p>
-        </div>
+         </div>
       </footer>
     </div>
   );
